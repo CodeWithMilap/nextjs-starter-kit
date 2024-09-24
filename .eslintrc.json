@@ -1,0 +1,55 @@
+{
+	"extends": [
+		"next/core-web-vitals",
+		"eslint:recommended",
+		"plugin:import/recommended",
+		"plugin:jsx-a11y/recommended",
+		"prettier"
+	],
+	"plugins": ["@typescript-eslint", "import"],
+	"env": { "node": true, "es6": true, "jest": true },
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"rules": {
+		"lines-between-class-members": [
+			"warn",
+			"always",
+			{ "exceptAfterSingleLine": true }
+		],
+		"jsx-a11y/no-onchange": 0,
+		"no-restricted-imports": [
+			"error",
+			{
+				"paths": ["utils", ".", "..", "../.."],
+				"patterns": []
+			}
+		],
+		"import/order": ["error", { "newlines-between": "always" }],
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": "error",
+		"react/display-name": [2]
+	},
+	"overrides": [
+		{
+			// https://stackoverflow.com/questions/64170868/why-eslint-consider-jsx-or-some-react-types-undefined-since-upgrade-typescript
+			"files": ["*.ts"],
+			"rules": {
+				"no-undef": "off"
+			}
+		}
+	],
+	"settings": {
+		"import/parsers": {
+			"@typescript-eslint/parser": [".ts"]
+		},
+		"import/resolver": {
+			"typescript": {
+				"alwaysTryTypes": true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+
+				// use <root>/path/to/folder/tsconfig.json
+				"project": "/"
+			}
+		}
+	}
+}
